@@ -1,0 +1,17 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/linux_init
+
+- name: Validate target operating system
+  ansible.builtin.import_tasks: validate.yml
+
+- name: Configure APT mirror
+  ansible.builtin.import_tasks: mirror.yml
+  when:
+    - linux_configure_mirror
+
+- name: Manage packages
+  ansible.builtin.import_tasks: packages.yml
+
+- name: Configure timezone
+  ansible.builtin.import_tasks: timezone.yml

@@ -1,0 +1,11 @@
+Types: deb
+URIs: {{ linux_mirrors['ubuntu'] }}
+Suites: {{ ansible_facts.distribution_release }} {{ ansible_facts.distribution_release }}-updates
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+Types: deb
+URIs: {{ linux_mirrors['ubuntu'] }}
+Suites: {{ ansible_facts.distribution_release }}-security
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg

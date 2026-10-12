@@ -1,0 +1,16 @@
+---
+- name: Update APT cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: "{{ linux_cache_valid_time }}"
+
+- name: Upgrade all packages when requested
+  ansible.builtin.package:
+    name: '*'
+    state: latest
+  when: linux_upgrade_packages
+
+- name: Install essential packages
+  ansible.builtin.package:
+    name: "{{ linux_packages }}"
+    state: present

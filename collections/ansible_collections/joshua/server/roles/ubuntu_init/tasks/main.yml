@@ -1,0 +1,50 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/ubuntu_init
+
+- name: Validate target operating system
+  ansible.builtin.assert:
+    that:
+      - ansible_facts.distribution == 'Ubuntu'
+    fail_msg: "ubuntu_init only supports Ubuntu hosts."
+
+- name: Configure Ubuntu mirror repositories
+  ansible.builtin.apt_repository:
+    repo: "deb {{ ubuntu_mirror }} {{ item }}"
+    state: present
+    filename: ubuntu-mirror
+  loop:
+    - "{{ ansible_facts.distribution_release }} main restricted universe multiverse"
+    - "{{ ansible_facts.distribution_release }}-updates main restricted universe multiverse"
+    - "{{ ansible_facts.distribution_release }}-security main restricted universe multiverse"
+  when: ubuntu_configure_mirror
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: "{{ apt_cache_valid_time }}"
+
+- name: Upgrade all packages when requested
+  ansible.builtin.apt:
+    upgrade: dist
+  when: ubuntu_upgrade_packages
+
+- name: Install essential packages
+  ansible.builtin.apt:
+    name: "{{ common_packages }}"
+    state: present
+
+- name: Set system timezone
+  ansible.builtin.file:
+    src: "/usr/share/zoneinfo/{{ ubuntu_timezone }}"
+    dest: /etc/localtime
+    state: link
+    force: true
+
+- name: Persist system timezone
+  ansible.builtin.copy:
+    content: "{{ ubuntu_timezone }}\n"
+    dest: /etc/timezone
+    owner: root
+    group: root
+    mode: "0644"

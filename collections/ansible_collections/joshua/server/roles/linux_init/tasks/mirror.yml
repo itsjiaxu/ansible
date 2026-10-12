@@ -1,0 +1,18 @@
+---
+- name: Configure Ubuntu APT sources
+  ansible.builtin.template:
+    src: ubuntu.sources.j2
+    dest: /etc/apt/sources.list.d/ubuntu.sources
+    owner: root
+    group: root
+    mode: "0644"
+  when: ansible_facts.distribution == 'Ubuntu'
+
+- name: Configure Debian APT sources
+  ansible.builtin.template:
+    src: debian.sources.j2
+    dest: /etc/apt/sources.list.d/debian.sources
+    owner: root
+    group: root
+    mode: "0644"
+  when: ansible_facts.distribution == 'Debian'

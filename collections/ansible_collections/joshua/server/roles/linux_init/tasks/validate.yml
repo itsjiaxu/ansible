@@ -1,0 +1,7 @@
+---
+- name: Assert supported Linux distribution
+  ansible.builtin.assert:
+    that:
+      - ansible_facts.system == 'Linux'
+      - ansible_facts.distribution in ['Debian', 'Ubuntu']
+    fail_msg: "linux_init does not support {{ ansible_facts.distribution }} yet."
