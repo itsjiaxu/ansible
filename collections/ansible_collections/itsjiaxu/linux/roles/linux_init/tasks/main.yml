@@ -1,0 +1,9 @@
+---
+- name: Configure APT repositories
+  ansible.builtin.import_tasks: repositories.yml
+
+- name: Install essential packages
+  ansible.builtin.import_tasks: packages.yml
+
+- name: Set system timezone
+  ansible.builtin.import_tasks: timezone.yml

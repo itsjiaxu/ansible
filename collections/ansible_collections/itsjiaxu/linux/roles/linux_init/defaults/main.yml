@@ -1,0 +1,13 @@
+---
+mirror: https://mirrors.aliyun.com
+
+packages:
+  - vim
+  - git
+  - curl
+  - ca-certificates
+  - wget
+  - htop
+  - net-tools
+
+timezone: Asia/Shanghai

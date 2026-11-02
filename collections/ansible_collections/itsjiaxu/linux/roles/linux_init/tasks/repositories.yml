@@ -1,0 +1,24 @@
+---
+- name: Configure APT repository mirror
+  ansible.builtin.template:
+    src: "{{ ansible_facts.distribution | lower }}.sources.j2"
+    dest: "/etc/apt/sources.list.d/{{ ansible_facts.distribution | lower }}.sources"
+    owner: root
+    group: root
+    mode: '0644'
+    backup: true
+  register: apt_sources_result
+
+- name: Disable legacy source.list
+  ansible.builtin.replace:
+    path: /etc/apt/sources.list
+    regexp: '^(?!\s*#)(\s*deb.*)$'
+    replace: '#\1'
+    backup: true
+  when: ansible_facts.os_family == 'Debian'
+  register: legacy_sources_result
+
+- name: Update APT cache
+  ansible.builtin.apt:
+    update_cache: true
+  when: apt_sources_result.changed or (legacy_sources_result.changed | default(false))

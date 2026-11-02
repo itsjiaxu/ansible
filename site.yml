@@ -1,0 +1,7 @@
+---
+- name: Configure Linux servers
+  hosts: all
+  become: true
+  gather_facts: true
+  roles:
+    - role: itsjiaxu.linux.linux_init

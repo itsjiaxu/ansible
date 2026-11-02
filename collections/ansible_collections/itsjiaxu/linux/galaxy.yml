@@ -1,0 +1,14 @@
+---
+# Minimal galaxy.yml for a playbook project for tools to recognize this as a collection
+
+namespace: "itsjiaxu"
+name: "linux"
+version: 0.0.1
+authors:
+  - Joshua
+
+description: Initialize a freshly installed Linux server with essential tools and configurations.
+license: ["GPL-3.0-or-later"]
+tags: ["debian", "linux", "ansible", "server-setup"]
+dependencies:
+  - community.general
