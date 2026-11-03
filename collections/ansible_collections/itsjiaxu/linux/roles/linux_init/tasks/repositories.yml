@@ -9,14 +9,22 @@
     backup: true
   register: apt_sources_result
 
+- name: Check legacy source.list
+  ansible.builtin.stat:
+    path: /etc/apt/sources.list
+  register: legacy_sources_file
+
 - name: Disable legacy source.list
   ansible.builtin.replace:
     path: /etc/apt/sources.list
     regexp: '^(?!\s*#)(\s*deb.*)$'
     replace: '#\1'
     backup: true
-  when: ansible_facts.os_family == 'Debian'
+  when:
+    - ansible_facts.os_family == 'Debian'
+    - legacy_sources_file.stat.exists
   register: legacy_sources_result
+  no_log: true
 
 - name: Update APT cache
   ansible.builtin.apt:
