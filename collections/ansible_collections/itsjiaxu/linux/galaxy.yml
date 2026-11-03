@@ -4,6 +4,7 @@
 namespace: "itsjiaxu"
 name: "linux"
 version: 0.0.1
+readme: README.md
 authors:
   - Joshua
 
@@ -11,4 +12,4 @@ description: Initialize a freshly installed Linux server with essential tools an
 license: ["GPL-3.0-or-later"]
 tags: ["debian", "linux", "ansible", "server-setup"]
 dependencies:
-  - community.general
+  community.general: "*"
