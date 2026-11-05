@@ -5,3 +5,5 @@
   gather_facts: true
   roles:
     - role: itsjiaxu.linux.linux_init
+    - role: itsjiaxu.linux.docker
+      when: install_docker | default(false) | bool

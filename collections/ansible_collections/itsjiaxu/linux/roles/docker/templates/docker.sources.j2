@@ -1,0 +1,6 @@
+Types: deb
+URIs: {{ docker_url }}/{{ ansible_facts.distribution | lower }}
+Suites: {{ ansible_facts.distribution_release }}
+Components: stable
+Architectures: {{ docker_arch_result.stdout }}
+Signed-By: /etc/apt/keyrings/docker.asc
