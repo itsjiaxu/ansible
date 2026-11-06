@@ -10,7 +10,6 @@
 
 - 控制端：Python 3.10+、Ansible Core 2.17+、SSH 客户端。
 - 被管理主机：Debian 或 Ubuntu，可通过 SSH 登录，并有 `sudo` 权限和 Python 3。
-- 依赖集合：`community.general`（用于设置时区）。
 
 ## 使用
 

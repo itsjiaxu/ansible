@@ -9,5 +9,3 @@ packages:
   - wget
   - htop
   - net-tools
-
-timezone: Asia/Shanghai

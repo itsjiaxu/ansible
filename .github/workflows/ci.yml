@@ -36,4 +36,4 @@ jobs:
         run: ansible-playbook --syntax-check site.yml
 
       - name: Validate playbook syntax
-        run: ansible-lint
+        run: ansible-lint collections/ inventory/ site.yml

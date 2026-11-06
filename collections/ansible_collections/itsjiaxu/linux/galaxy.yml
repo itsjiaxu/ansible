@@ -11,6 +11,4 @@ authors:
 description: Initialize a freshly installed Linux server with essential tools and configurations.
 license: ["GPL-3.0-or-later"]
 tags: ["debian", "linux", "ansible", "server_setup"]
-dependencies:
-  community.general: "*"
 repository: https://github.com/itsjiaxu/ansible
